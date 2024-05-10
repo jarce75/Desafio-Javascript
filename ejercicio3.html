@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>
+                Resultado: <span class="resultado"></span>
+            </h2>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Valor 1</label>
+                        <input id="valor1" type="text">
+                    </div>
+                    <div>
+                        <label for="">Valor 2</label>
+                        <input id="valor2" type="text">
+                    </div>
+                    <div style="display: flex">
+                        <button id="btn-sumar" type="button">
+                            Sumar
+                        </button>
+                        <button id="btn-restar" type="button">
+                            Restar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    var resultado = document.querySelector('.resultado');
+    var valor1 = document.getElementById('valor1');
+    var valor2 = document.getElementById('valor2');
+    var btnSumar = document.getElementById('btn-sumar');
+    var btnRestar = document.getElementById('btn-restar');
+
+   
+    function limpiarResultado(){
+        resultado.innerHTML = '';
+    }
+ 
+    function mostrarResultado(result){
+               if(result<0){
+            result = 0
+        }
+        resultado.innerHTML = result
+    }
+    
+        btnSumar.addEventListener('click', function(){
+        limpiarResultado();
+               if(isNaN(valor1.value) || isNaN(valor2.value)){
+            alert('Debes ingresar solo valores numéricos')
+        } else {
+            var resultado = Number(valor1.value) + Number(valor2.value)
+            mostrarResultado(resultado)
+        }
+    })
+
+        btnRestar.addEventListener('click', function(){
+        limpiarResultado();
+        
+        if(isNaN(valor1.value) || isNaN(valor2.value)){
+            alert('Debes ingresar solo valores numéricos')
+        } else {
+            var resultado = Number(valor1.value) - Number(valor2.value)
+            mostrarResultado(resultado)
+        }
+    })
+    </script>
+</body>
+
+</html>

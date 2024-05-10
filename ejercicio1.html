@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+      // variables
+    var contactForm = document.getElementById('formulario');
+    var nameForm = document.getElementById("nombre");
+    var subjectForm = document.getElementById("asunto");
+    var messageForm = document.getElementById("mensaje");
+
+    var resultMessage = document.querySelector(".resultado");
+
+    var nameError = document.querySelector(".errorNombre")
+    var subjectError = document.querySelector(".errorAsunto")
+    var messageError = document.querySelector(".errorMensaje")
+
+//    Funcion valida inputs con expresion regular
+    function validation(name, subject, message){
+        var expression = /[a-zA-Z]\w+/
+        var validationFlag = true;
+        if(name == "" || !expression.test(name)){
+            nameError.innerHTML = "El nombre es necesario y no debe contener números"
+            validationFlag = false;
+        }
+        if(subject == "" || !expression.test(subject)){
+            subjectError.innerHTML = "El asunto es necesario y no debe contener números"
+            validationFlag = false;
+        }
+        if(message == "" || !expression.test(message)){
+            messageError.innerHTML = "El mensaje es necesario y no debe contener números"
+            validationFlag = false;
+        }
+        return validationFlag;
+    }
+    // Funcion limpiar mensajes (error y exito)
+    function clearMessages(){
+        resultMessage.innerHTML = "";
+        nameError.innerHTML = "";
+        subjectError.innerHTML = "";
+        messageError.innerHTML = "";
+    }
+
+    // Función limpiar el formulario
+    contactForm.reset();
+
+    // Función mostrar mensaje exitoso
+    function success(){
+        resultMessage.innerHTML = "Mensaje enviado exitosamente."
+    }
+    
+    contactForm.addEventListener("submit", function(event){
+        event.preventDefault();
+
+        // limpiar mensajes
+        clearMessages()
+
+        // Maneja resultado de la validación
+        if(validation(nameForm.value, subjectForm.value, messageForm.value)){
+            
+            success();
+            contactForm.reset();
+        }
+    })
+    </script>
+</body>
+
+</html>
